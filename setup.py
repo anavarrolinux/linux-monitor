@@ -10,6 +10,7 @@ setup(
     url="https://github.com/anavarrolinux/linux-monitor",
     packages=find_packages(),
     include_package_data=True,
+    py_modules=["collect", "monitor_tui"],
     install_requires=[
         "paramiko>=3.0.0",
         "pyyaml>=6.0",
