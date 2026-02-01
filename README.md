@@ -39,10 +39,12 @@ Pre-Linux-Monitor Preparation
 
 Linux-Monitor Installation
 
-    git clone https://github.com/anavarrolinux/linux-monitor.git /opt/linux-monitor
+    sudo git clone https://github.com/anavarrolinux/linux-monitor.git /opt/linux-monitor
+    sudo python3 -m venv /opt/linux-monitor
     cd /opt/linux-monitor
-    python3 -m venv venv
-    source venv/bin/activate
+    source bin/activate
+    sudo chown anavarro:anavarro -R /opt/linux-monitor
+    sudo chmod 700 -R /opt/linux-monitor
     pip install .
 
 Linux Monitor TUI
