@@ -1,0 +1,19 @@
+# Linux Monitor Configuration
+database:
+  path: "/opt/linux-monitor/monitor.db"
+  journal_mode: "WAL"
+
+ssh:
+  user: "anavarro"
+  timeout: 5
+  max_workers: 10
+  # Path to a specific private key if not using default agent
+  # key_filename: "~/.ssh/id_ed25519"
+
+files:
+  servers_list: "/opt/linux-monitor/servers.txt"
+
+ui:
+  refresh_interval: 60
+  dark_mode: true
+
