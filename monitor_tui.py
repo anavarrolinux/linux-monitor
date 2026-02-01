@@ -148,5 +148,9 @@ class LinuxServerMonitor(App):
                 uptime or "-"
             )
 
+def main():
+    app = LinuxServerMonitor()
+    app.run()
+
 if __name__ == "__main__":
-    LinuxServerMonitor().run()
+    main()
