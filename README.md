@@ -3,26 +3,20 @@
 A high-performance, concurrent monitoring tool designed for Rocky Linux 9 environments. It uses a Python-based collector to gather system metrics via SSH and displays them in a real-time Terminal User Interface (TUI).
 
 🛠 Features
-    
-    Asynchronous Collection: Uses ThreadPoolExecutor to poll multiple Rocky Linux 9 nodes simultaneously, ensuring the monitoring scale doesn't lag with more hosts.
-    
-    Modern TUI: Built with the Textual framework for a responsive, interactive dashboard.
-    
-    Database Concurrency: Leverages SQLite with Write-Ahead Logging (WAL) mode, allowing the TUI to read data without being blocked by the collector's write operations.
-    
-    Systemd Integration: Designed to run as a native Linux daemon using systemd services and timers for "set and forget" reliability.
-    
-    Security First: Uses paramiko for SSH communication, utilizing system host keys and rejecting unknown hosts to maintain a secure environment.
+
+ - Asynchronous Collection: Uses ThreadPoolExecutor to poll multiple Rocky Linux 9 nodes simultaneously, ensuring the monitoring scale doesn't lag with more hosts.
+ - Modern TUI: Built with the Textual framework for a responsive, interactive dashboard.
+ - Database Concurrency: Leverages SQLite with Write-Ahead Logging (WAL) mode, allowing the TUI to read data without being blocked by the collector's write operations.
+ - Systemd Integration: Designed to run as a secured native Linux daemon using systemd services and timers for "set and forget" reliability.
+ - Security First: Uses paramiko for SSH communication, utilizing system host keys and rejecting unknown hosts to maintain a secure environment.
 
 🏗 Architecture
 
 The system is split into three main components:
-    
-    collect.py: The backend engine that parses /proc and os-release data from remote nodes.
-    
-    config.yaml: A centralized configuration file for managing SSH users, database paths, and polling intervals.
-    
-    monitor_tui.py: The frontend dashboard providing real-time visibility into CPU load, memory saturation, and failed systemd services.
+
+- `collect.py`: The backend engine that parses /proc and os-release data from remote nodes.
+- `config.yaml`: A centralized configuration file for managing SSH users, database paths, and polling intervals.
+- `monitor_tui.py`: The frontend dashboard providing real-time visibility into CPU load, memory saturation, and failed systemd services.
 
 🚀 Deployment (Rocky Linux 9)
 Prerequisites
@@ -43,11 +37,11 @@ Linux-Monitor Installation
     sudo python3 -m venv /opt/linux-monitor
     cd /opt/linux-monitor
     source bin/activate
-    sudo chown anavarro:anavarro -R /opt/linux-monitor
+    sudo chown <User>:<User>-R /opt/linux-monitor
     sudo chmod 700 -R /opt/linux-monitor
     pip install .
 
 Linux Monitor TUI
-<img width="1593" height="608" alt="image" src="https://github.com/user-attachments/assets/2df8d018-2be3-4f30-b9c9-1a9c162a04d9" />
+<img width="1593" height="808" alt="LinuxMonitorTUI" src="https://github.com/user-attachments/assets/2df8d018-2be3-4f30-b9c9-1a9c162a04d9" />
 
     
