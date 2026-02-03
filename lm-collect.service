@@ -22,7 +22,7 @@ ReadWritePaths=/opt/linux-monitor
 ProtectHome=tmpfs
 
 # Only allow access to the specific SSH keys needed for polling
-BindReadOnlyPaths=/home/anavarro/.ssh
+BindReadOnlyPaths=/home/<User>/.ssh
 
 # Restricts the creation of SUID/SGID files
 RestrictSUIDSGID=yes
