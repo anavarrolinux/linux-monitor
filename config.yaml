@@ -4,7 +4,7 @@ database:
   journal_mode: "WAL"
 
 ssh:
-  user: "anavarro"
+  user: "<User>"
   timeout: 5
   max_workers: 10
   # Path to a specific private key if not using default agent
