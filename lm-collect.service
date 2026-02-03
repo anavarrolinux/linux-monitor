@@ -1,0 +1,87 @@
+[Unit]
+Description=Linux Monitor Collection Service
+After=network.target
+
+[Service]
+Type=oneshot
+User=<User>
+WorkingDirectory=/opt/linux-monitor
+ExecStart=/opt/linux-monitor/bin/lm-collect
+
+# --- Permissions & File System ---
+# Prevents the process and children from gaining new privileges (e.g., via setuid binaries)
+NoNewPrivileges=yes
+
+# Mounts / as read-only for the service
+ProtectSystem=strict
+
+# Allows writing only to your specific app directory
+ReadWritePaths=/opt/linux-monitor
+
+# Hides /home from the service by mounting a tmpfs over it
+ProtectHome=tmpfs
+
+# Only allow access to the specific SSH keys needed for polling
+BindReadOnlyPaths=/home/anavarro/.ssh
+
+# Restricts the creation of SUID/SGID files
+RestrictSUIDSGID=yes
+
+# Removes IPC objects when the service stops
+RemoveIPC=yes
+
+# Sets up a private user namespace to isolate the service from the host's root user
+PrivateUsers=yes
+
+# Denies access to all physical hardware devices
+DeviceAllow=
+
+# Ensures any files created (like the DB) are only readable by the owner
+UMask=0077
+
+# --- Kernel & Process Hardening ---
+
+# Prevents the service from modifying the system clock
+ProtectClock=yes
+
+# Prevents access to the kernel log ring buffer
+ProtectKernelLogs=yes
+
+# Restricts system calls to the native architecture only
+SystemCallArchitectures=native
+
+# Allows only common system service calls and explicitly blocks dangerous ones
+SystemCallFilter=@system-service
+SystemCallFilter=~@clock @cpu-emulation @debug @module @mount @obsolete @privileged @raw-io @reboot @resources @swap
+
+# Prevents creating memory mappings that are both writable and executable
+MemoryDenyWriteExecute=yes
+RestrictRealtime=yes
+LockPersonality=yes
+ProtectKernelTunables=yes
+ProtectKernelModules=yes
+ProtectControlGroups=yes
+
+# Drops ALL kernel capabilities; the script runs as a pure unprivileged process
+CapabilityBoundingSet=
+
+# Hides other users' processes from /proc
+ProtectProc=invisible
+ProcSubset=pid
+
+# --- Network & Namespaces ---
+
+# Restrict the types of sockets the script can create (IP and Local Unix sockets)
+RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX
+ProtectHostname=yes
+RestrictNamespaces=yes
+
+# Provides a private /tmp and /var/tmp namespace
+PrivateTmp=yes
+
+# Provides a private /dev with only basic virtual devices like /dev/null
+PrivateDevices=yes
+
+# Firewalling: Deny all by default, only allow your management subnet
+IPAddressDeny=any
+IPAddressAllow=<Add CIDRs Here>
