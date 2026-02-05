@@ -18,6 +18,13 @@ The system is split into three main components:
 - `config.yaml`: A centralized configuration file for managing SSH users, database paths, and polling intervals.
 - `monitor_tui.py`: The frontend dashboard providing real-time visibility into CPU load, memory saturation, and failed systemd services.
 
+Security Model
+- Host key policy: Rejects unknown hosts
+- Least privilege: Recommend a dedicated user with minimal sudo (or no sudo)
+- Command surface area: It is a fixed command block for ease of use and consistant reporting
+- Data sensitivity: Only Hostname, IP, Pretty OS Name, Kernel version, Resources (CPU Load, MEM%, / Disk% and Uptime) are stored in SQLite and retention possible by backing up the .db file
+- Operational mode: collector can be automated via systemd service + timer (Examples Included)
+
 🚀 Deployment (Rocky Linux 9)
 Prerequisites
 
@@ -44,4 +51,4 @@ Linux-Monitor Installation
 Linux Monitor TUI
 <img width="1593" height="808" alt="LinuxMonitorTUI" src="https://github.com/user-attachments/assets/2df8d018-2be3-4f30-b9c9-1a9c162a04d9" />
 
-    
+Initial scaffolding was AI-assisted; functionality, testing, debugging, and final design decisions were implemented through iterative development and validation.
